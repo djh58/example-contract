@@ -1,5 +1,23 @@
 # Archway Network Starter Pack
 
+## Running this start code - TL;DR 
+
+This code sets a string value at deployment, and allows you to read/write to it. Modified from the original increment contract in Archway's start repos. 
+
+Before starting, make sure you have archway's CLI installed, as well as a wallet seeded with funds from the faucet on the Constantine testnet. For steps on those, see the docs. 
+
+1) compile via `archway build`
+2) make sure it deploys properly via `archway deploy --dry-run`
+3) actually deploy via `archway deploy` 
+  a) it'll prompt you to choose a wallet, which will be the name it has when you run `archway accounts`
+  b) it'll also prompt you for a JSON object to instantiate it with. think of it as like a constructor. enter `{"word": "Foo" }`, where "Foo" can be a word of your choice.
+4) query for this word via `archway query contract-state smart --args '{"get_word": {}}'`
+5) change it to something new via `archway tx --args '{"set_word": {"word": "FooBar"}}'`, where "FooBar" can be a word of your choice.
+6) repeat step 4 to verify this transaction succeeded! 
+
+
+## Description
+
 This is a template to build smart contracts in Rust to run inside a
 [Cosmos SDK](https://github.com/cosmos/cosmos-sdk) module on all chains that enable it.
 To understand the framework better, please read the overview in the
