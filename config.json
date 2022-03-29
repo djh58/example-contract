@@ -1,12 +1,12 @@
 {
-  "name": "cz-starter",
+  "name": "example-contract",
   "developer": {
     "archwayd": {
       "docker": true
     },
     "dApp": {
       "gasPoolContract": null,
-      "rewardAddress": null,
+      "rewardAddress": "archway144w56a3t6vvym9alw0ufwdmgs2w5jfx8f628c6",
       "gasRebate": false,
       "collectPremium": false,
       "premiumPercentage": 0
@@ -19,7 +19,32 @@
       "query": "archwayd query wasm",
       "tx": "archwayd tx wasm execute"
     },
-    "deployments": []
+    "deployments": [
+      {
+        "type": "instantiate",
+        "chainId": "constantine-1",
+        "codeId": 37,
+        "address": "archway1pay2fdaqxzw9sts4q8cq4ycq7wtm0uc3ty6m6x",
+        "admin": "archway144w56a3t6vvym9alw0ufwdmgs2w5jfx8f628c6"
+      },
+      {
+        "type": "create",
+        "chainId": "constantine-1",
+        "codeId": 37
+      },
+      {
+        "type": "instantiate",
+        "chainId": "constantine-1",
+        "codeId": 36,
+        "address": "archway1ap00e6jf35mdea7gsqa9z2z9wgckecf8ahs9yv",
+        "admin": "archway144w56a3t6vvym9alw0ufwdmgs2w5jfx8f628c6"
+      },
+      {
+        "type": "create",
+        "chainId": "constantine-1",
+        "codeId": 36
+      }
+    ]
   },
   "network": {
     "name": "constantine",

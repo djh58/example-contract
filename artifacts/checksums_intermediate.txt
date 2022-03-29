@@ -1,0 +1,1 @@
+a2c0de83f4b64b31b108984ef51b28b6999eb5c9bc309516ccadf27eea3a6df1  ./target/wasm32-unknown-unknown/release/cz_starter.wasm

@@ -1,5 +1,5 @@
 [package]
-name = "cz-starter"
+name = "example-contract"
 version = "0.1.0"
 authors = ["Dan Hepworth <danhep@gmail.com>"]
 edition = "2018"
