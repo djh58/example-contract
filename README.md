@@ -10,10 +10,9 @@ Before starting, make sure you have archway's CLI installed, as well as a wallet
 2) make sure it deploys properly via `archway deploy --dry-run`
 3) actually deploy via `archway deploy` 
   a) it'll prompt you to choose a wallet, which will be the name it has when you run `archway accounts`
-  b) it'll also prompt you for a JSON object to instantiate it with. think of it as like a constructor. enter `{"word": "Foo" }`, where "Foo" can be a word of your choice.
-4) query for this word via `archway query contract-state smart --args '{"get_word": {}}'`
-5) change it to something new via `archway tx --args '{"set_word": {"word": "FooBar"}}'`, where "FooBar" can be a word of your choice.
-6) repeat step 4 to verify this transaction succeeded! 
+  b) it'll also prompt you for a JSON object to instantiate it with. think of it as like a constructor. enter `{}` since we don't need an initial value.
+4) generate a new number via  `archway tx --args '{"random": {}}'`
+5) query for this number via `archway query contract-state smart --args '{"get_number": {}}'`
 
 
 ## Description

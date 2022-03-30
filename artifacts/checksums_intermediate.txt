@@ -1,1 +1,1 @@
-a2c0de83f4b64b31b108984ef51b28b6999eb5c9bc309516ccadf27eea3a6df1  ./target/wasm32-unknown-unknown/release/cz_starter.wasm
+1598c78fa533841f01a5093107cebe2084654b9d56112a271b9bf6be6811ea4d  ./target/wasm32-unknown-unknown/release/example_contract.wasm
