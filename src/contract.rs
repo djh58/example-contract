@@ -2,9 +2,10 @@
 use cosmwasm_std::entry_point;
 use cosmwasm_std::{to_binary, Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult};
 use cw2::set_contract_version;
+use sha2::{Sha256, Digest};
 
 use crate::error::ContractError;
-use crate::msg::{WordResponse, ExecuteMsg, InstantiateMsg, QueryMsg};
+use crate::msg::{NumberResponse, ExecuteMsg, InstantiateMsg, QueryMsg};
 use crate::state::{State, STATE};
 
 // version info for migration info
@@ -19,16 +20,14 @@ pub fn instantiate(
     msg: InstantiateMsg,
 ) -> Result<Response, ContractError> {
     let state = State {
-        word: msg.word.clone(),
-        owner: info.sender.clone(),
+        number: 0,
     };
     set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
     STATE.save(deps.storage, &state)?;
 
     Ok(Response::new()
         .add_attribute("method", "instantiate")
-        .add_attribute("owner", info.sender)
-        .add_attribute("word", msg.word))
+        .add_attribute("number", state.number.to_string()))
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]
@@ -39,29 +38,36 @@ pub fn execute(
     msg: ExecuteMsg,
 ) -> Result<Response, ContractError> {
     match msg {
-        ExecuteMsg::Set {word} => try_set(deps, word),
+        ExecuteMsg::Random {} => try_pseudorandom(deps, _env, _info),
     }
 }
 
-pub fn try_set(deps: DepsMut, word: String) -> Result<Response, ContractError> {
+pub fn try_pseudorandom(deps: DepsMut, _env: Env, _info: MessageInfo) -> Result<Response, ContractError> {
+    let mut hasher = Sha256::new();
+    hasher.update(_env.block.height.to_string().as_bytes());
+    let result = hasher.finalize()[0];
+
+
     STATE.update(deps.storage, |mut state| -> Result<_, ContractError> {
-        state.word = word;
+        state.number = result;
         Ok(state)
     })?;
 
-    Ok(Response::new().add_attribute("method", "try_set"))
+    Ok(Response::new()
+        .add_attribute("method", "try_pseudorandom")
+        .add_attribute("number", result.to_string()))
 }
 
 
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
     match msg {
-        QueryMsg::GetWord {} => to_binary(&query_word(deps)?),
+        QueryMsg::GetNumber {} => to_binary(&query_number(deps)?),
     }
 }
 
-fn query_word(deps: Deps) -> StdResult<WordResponse> {
+fn query_number(deps: Deps) -> StdResult<NumberResponse> {
     let state = STATE.load(deps.storage)?;
-    Ok(WordResponse { word: state.word })
+    Ok(NumberResponse { number: state.number })
 }
 

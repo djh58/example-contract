@@ -1,1 +1,2 @@
 079035f490dbf98b25f3878cdb5543da108a3c527819d22feabad8c5fe4a8fbf  cz_starter.wasm
+f998c3d9274e548f6428e8f38db330518de38ec6a5f0706f1e24edf5d3445cd4  example_contract.wasm
